@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:text="${title}">Хинкалидзе</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<main>
+    <h1>Наша выпечка</h1>
+    <h4>Подробная информация о товаре</h4>
+    <div th:each="el : ${products}" >
+        <h3 th:text="${el.title}"></h3>
+        <p th:text="${el.description}"></p>
+        <span th:text="${el.price}"></span>
+        <form action="'/market/delete/' + ${el.id}}" method="post">
+            <button type="submit" >Удалить</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

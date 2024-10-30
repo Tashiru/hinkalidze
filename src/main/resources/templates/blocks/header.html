@@ -1,0 +1,18 @@
+<div th:fragment="header">
+    <header class="header">
+        <div class="container">
+            <img src="./images/icons/logo.png" alt="Логотип" class="header__logo">
+
+            <nav class="header__nav">
+                <ul class="header_list">
+                    <li><a  href="/">ГЛАВНАЯ</a></li>
+                    <li><a  href="#!">КАТЕГОРИИ</a></li>
+                    <li><a  href="#!">НАШИ ПРЕДЛОЖЕНИЯ</a></li>
+                    <li><a th:class="${active}" href="/market">МАГАЗИН</a></li>
+                </ul>
+            </nav>
+
+            <a href="#!" class="btn">КОРЗИНА</a>
+        </div>
+    </header>
+</div>
