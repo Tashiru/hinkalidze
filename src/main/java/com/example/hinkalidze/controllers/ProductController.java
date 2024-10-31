@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequiredArgsConstructor
@@ -17,9 +19,9 @@ public class ProductController {
 
 
     @GetMapping("/market")
-    public String marketPage(Model model){
+    public String marketPage(@RequestParam(name ="title", required = false) String title, Model model){
         model.addAttribute("active", "active");
-        model.addAttribute("products", productService.listProducts());
+        model.addAttribute("products", productService.listProducts(title));
         return "market";
     }
     @GetMapping("/market/{id}")
@@ -28,15 +30,21 @@ public class ProductController {
         return "product-info";
     }
 
-    @PostMapping("/market/add")
-    public String addProduct(Product product){
-        productService.saveProduct(product);
-        return "redirect:/market";
+    @GetMapping("/market/product_settings")
+    public String productSettingsPage(@RequestParam(name ="title", required = false) String title, Model model){
+        model.addAttribute("products", productService.listProducts(title));
+        return "product_settings";
     }
 
-    @PostMapping("/market/delete/{id}")
+    @PostMapping("/market/product_settings/add")
+    public String addProduct(Product product){
+        productService.saveProduct(product);
+        return "redirect:/market/product_settings";
+    }
+
+    @PostMapping("/market/product_settings/delete/{id}")
     public String deleteProduct(@PathVariable(value = "id") Long id) {
         productService.deleteProduct(id);
-        return "redirect:/market";
+        return "redirect:/market/product_settings";
     }
 }

@@ -18,7 +18,7 @@
         <h3 th:text="${el.title}"></h3>
         <p th:text="${el.description}"></p>
         <span th:text="${el.price}"></span>
-        <form action="'/market/delete/' + ${el.id}}" method="post">
+        <form action="'/market/delete/' + ${el.id}" method="post">
             <button type="submit" >Удалить</button>
         </form>
     </div>
