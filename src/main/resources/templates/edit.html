@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title th:text="${title}">Хинкалидзе</title>
+    <!--    <link rel="stylesheet" type="text/css" href="ccs/style.css" th:href="@{/ccs/style.css}">-->
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/web_function.js"></script>
+</head>
+
+<body>
+<header th:insert="blocks/header"></header>
+
+<section class="settings_edit">
+
+    <div class="container" th:each="el : ${products_edit}">
+        <form method="post" enctype="multipart/form-data">
+            <h3 class="settings__product_title">Заполните ниже поля для изменения продукта</h3>
+            <img  th:src="'/images/' + ${el.getPreviewImageId}" alt="Превью изображения"
+                 class="preview_img"/>
+            <img src="" alt="Превью изображения"
+                 class="preview_img"/>
+            <input type="file" accept="image/*" name="file1" placeholder="Введите название продукта" class="input_form">
+            <input type="text" th:value="${el.title}" name="title" placeholder="Введите название продукта"
+                   class="input_form">
+            <textarea name="description" th:text="${el.description}" placeholder="Введите описание продукта"
+                      class="input_form"></textarea>
+            <input type="text" th:value="${el.price}" name="price" placeholder="Введите цену продукта"
+                   class="input_form">
+
+            <button class="btn" type="submit">Добавить</button>
+        </form>
+
+    </div>
+
+</section>
+
+<header th:insert="blocks/footer"></header>
+</body>
+
+</html>

@@ -10,107 +10,118 @@
 </head>
 
 <body>
-<header th:insert="blocks/header"></header>
+<header th:insert="~{blocks/header}"></header>
 
-    <main class="main">
-        
-        <div class="line">
-            <h3 class="add">Добавление товара</h3>
-        </div>
-        <form action="/market/product_settings/add" method="post">
+<main class="main">
+
+    <div class="line">
+        <h3 class="add">Добавление товара</h3>
+    </div>
+    <form action="/market/product_settings/add" method="post" enctype="multipart/form-data">
         <section class="settings">
             <div class="container">
                 <h3 class="settings__product_title">Заполните ниже поля для добавляемого продукта</h3>
-                <img id="preview" src="" alt="Превью изображения" class="preview_img"/>
-                <input type="file" accept="image/*" onchange="displayImage(this)" name="file" placeholder="Выберите картинку" class="input_form">
+                <img  src="" alt="Превью изображения"  class="preview_img"/>
+                <input type="file" name="file1" accept="image/*" placeholder="Выберите картинку" class="input_form">
+
                 <input type="text" name="title" placeholder="Введите название продукта" class="input_form"/><br><br>
                 <textarea name="description" placeholder="Введите описание продукта" class="input_form"></textarea>
                 <input type="text" name="price" placeholder="Введите цену продукта" class="input_form"/><br><br>
                 <button class="btn" type="submit">Добавить</button>
             </div>
         </section>
-        </form>
-        <div class="line">
-            <h3 class="add">Редактирование товара</h3>
-        </div>
+    </form>
+    <div class="line">
+        <h3 class="add">Редактирование товара</h3>
+    </div>
 
-        <section class="catalog">
-            <div class="container">
-                <div class="food-list__card" th:each="el : ${products}">
-                    <img src="" alt="" class="food-list__img">
-                    <div class="food-list__text-wrapper">
-                        <h4 class="food-list__title" th:text="${el.title}">Хачапури</h4>
-                        <p class="food-list__desc" th:text="${el.description}">лепёшка из теста с сырной начинкой. В середине делают углубление, куда
-                            перед подачей разбивают яйцо. Блюдо традиционно подают горячим.</p>
-                        <div class="btn__box">
-                            <div class="border_btn">
-                                <button type="button" class="btn__market">
-                                    <svg class="plus_icon" width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_74_319)">
-                                            <path
-                                                    d="M20 0C8.955 0 0 8.95375 0 20C0 31.0462 8.95375 40 20 40C31.0462 40 40 31.0462 40 20C40 8.95375 31.0462 0 20 0ZM20 37.54C10.35 37.54 2.5 29.65 2.5 20C2.5 10.35 10.35 2.5 20 2.5C29.65 2.5 37.5 10.35 37.5 20C37.5 29.65 29.65 37.54 20 37.54Z" />
-                                            <path
-                                                    d="M28.75 18.75H21.25H18.75H11.25C10.56 18.75 10 19.31 10 20C10 20.69 10.56 21.25 11.25 21.25H21.25H28.75C29.44 21.25 30 20.69 30 20C30 19.31 29.44 18.75 28.75 18.75Z" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_74_319">
-                                                <rect width="40" height="40" rx="20" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </button>
-                                <span class="product__price_count" th:text="${el.price}">₽120 1шт</span>
-                                <button type="button" class="btn__market">
-                                    <svg class="plus_icon" width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_74_317)">
-                                            <path
-                                                    d="M20 0C8.955 0 0 8.95375 0 20C0 31.0462 8.95375 40 20 40C31.0462 40 40 31.0462 40 20C40 8.95375 31.0462 0 20 0ZM20 37.54C10.35 37.54 2.5 29.65 2.5 20C2.5 10.35 10.35 2.5 20 2.5C29.65 2.5 37.5 10.35 37.5 20C37.5 29.65 29.65 37.54 20 37.54ZM28.75 18.75H21.25V11.25C21.25 10.56 20.69 10 20 10C19.31 10 18.75 10.56 18.75 11.25V18.75H11.25C10.56 18.75 10 19.31 10 20C10 20.69 10.56 21.25 11.25 21.25H18.75V28.75C18.75 29.44 19.31 30 20 30C20.69 30 21.25 29.44 21.25 28.75V21.25H28.75C29.44 21.25 30 20.69 30 20C30 19.31 29.44 18.75 28.75 18.75Z" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_74_317">
-                                                <rect width="40" height="40" rx="20" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </button>
-                            </div>
+    <section class="catalog">
+        <div class="container">
+            <div class="food-list__card" th:each="el : ${products}">
 
-                            <button type="button" class="shopping__cart">
-                                <svg class="shopping__cart-add" width="25" height="25" viewBox="0 0 25 25" fill="none"
+
+<!--                    <h4 class="food-list__title" th:text="${img.name}">Хачапури</h4>-->
+                    <img th:src="'/images/' + ${el.getPreviewImageId}" alt="none" class="food-list__img">
+
+<!--                <img th:src="'/images/' +${images.${el.preview_image_id}}" alt="none" class="food-list__img">-->
+                <div class="food-list__text-wrapper">
+                    <h4 class="food-list__title" th:text="${el.title}">Хачапури</h4>
+                    <p class="food-list__desc" th:text="${el.description}">лепёшка из теста с сырной начинкой. В
+                        середине делают углубление, куда
+                        перед подачей разбивают яйцо. Блюдо традиционно подают горячим.</p>
+                    <div class="btn__box">
+                        <div class="border_btn">
+                            <button type="button" class="btn__market">
+                                <svg class="plus_icon" width="40" height="40" viewBox="0 0 40 40" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                            d="M18.75 12.5C15.3125 12.5 12.5 15.3125 12.5 18.75C12.5 22.1875 15.3125 25 18.75 25C22.1875 25 25 22.1875 25 18.75C25 15.3125 22.1875 12.5 18.75 12.5ZM21.0938 19.5312H19.5312V21.0938C19.5312 21.5625 19.2188 21.875 18.75 21.875C18.2812 21.875 17.9688 21.5625 17.9688 21.0938V19.5312H16.4062C15.9375 19.5312 15.625 19.2188 15.625 18.75C15.625 18.2812 15.9375 17.9688 16.4062 17.9688H17.9688V16.4062C17.9688 15.9375 18.2812 15.625 18.75 15.625C19.2188 15.625 19.5312 15.9375 19.5312 16.4062V17.9688H21.0938C21.5625 17.9688 21.875 18.2812 21.875 18.75C21.875 19.2188 21.5625 19.5312 21.0938 19.5312Z"
-                                    />
-                                    <path
-                                            d="M11.0938 20.3125C11.0156 19.8438 10.9375 19.2969 10.9375 18.75H5.9375C5.70313 18.75 5.46875 18.5156 5.46875 18.2812C5.46875 18.0469 5.625 17.8125 5.85938 17.8125L11.1719 16.9531C11.9531 13.5156 15.0781 10.9375 18.75 10.9375C19.5313 10.9375 20.2344 11.0156 20.9375 11.25L21.875 6.40625C21.9531 6.01562 21.6406 5.54688 21.25 5.46875C20.8594 5.39062 20.3906 5.70313 20.3125 6.09375L20.1562 7.03125H5.15625V6.95312C5.625 5.9375 5.625 4.76562 5 3.82813C4.45313 2.89063 3.4375 2.34375 2.34375 2.34375H0.78125C0.3125 2.34375 0 2.65625 0 3.125C0 3.59375 0.3125 3.90625 0.78125 3.90625H2.34375C2.89063 3.90625 3.4375 4.21875 3.75 4.6875C4.0625 5.15625 4.0625 5.78125 3.82813 6.25L3.20313 7.5C3.20313 7.57813 3.20313 7.57812 3.125 7.65625C3.125 7.65625 3.125 7.73438 3.125 7.8125C3.125 7.89062 3.125 7.89062 3.125 7.96875C3.125 8.04688 3.125 8.04687 3.125 8.125L6.09375 16.1719L5.625 16.25C4.60938 16.4062 3.90625 17.2656 3.90625 18.2812C3.90625 19.0625 4.29688 19.6875 4.92188 20.0781C4.76563 20.3906 4.6875 20.7031 4.6875 21.0938C4.6875 22.4219 5.70313 23.4375 7.03125 23.4375C8.35938 23.4375 9.375 22.4219 9.375 21.0938C9.375 20.7812 9.29688 20.5469 9.21875 20.3125H11.0938ZM7.03125 21.875C6.5625 21.875 6.25 21.5625 6.25 21.0938C6.25 20.625 6.5625 20.3125 7.03125 20.3125C7.5 20.3125 7.8125 20.625 7.8125 21.0938C7.8125 21.5625 7.5 21.875 7.03125 21.875Z"
-                                    />
+                                    <g clip-path="url(#clip0_74_319)">
+                                        <path
+                                                d="M20 0C8.955 0 0 8.95375 0 20C0 31.0462 8.95375 40 20 40C31.0462 40 40 31.0462 40 20C40 8.95375 31.0462 0 20 0ZM20 37.54C10.35 37.54 2.5 29.65 2.5 20C2.5 10.35 10.35 2.5 20 2.5C29.65 2.5 37.5 10.35 37.5 20C37.5 29.65 29.65 37.54 20 37.54Z"/>
+                                        <path
+                                                d="M28.75 18.75H21.25H18.75H11.25C10.56 18.75 10 19.31 10 20C10 20.69 10.56 21.25 11.25 21.25H21.25H28.75C29.44 21.25 30 20.69 30 20C30 19.31 29.44 18.75 28.75 18.75Z"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_74_319">
+                                            <rect width="40" height="40" rx="20" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </button>
+                            <span class="product__price_count" th:text="${el.price}">₽120 1шт</span>
+                            <button type="button" class="btn__market">
+                                <svg class="plus_icon" width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_74_317)">
+                                        <path
+                                                d="M20 0C8.955 0 0 8.95375 0 20C0 31.0462 8.95375 40 20 40C31.0462 40 40 31.0462 40 20C40 8.95375 31.0462 0 20 0ZM20 37.54C10.35 37.54 2.5 29.65 2.5 20C2.5 10.35 10.35 2.5 20 2.5C29.65 2.5 37.5 10.35 37.5 20C37.5 29.65 29.65 37.54 20 37.54ZM28.75 18.75H21.25V11.25C21.25 10.56 20.69 10 20 10C19.31 10 18.75 10.56 18.75 11.25V18.75H11.25C10.56 18.75 10 19.31 10 20C10 20.69 10.56 21.25 11.25 21.25H18.75V28.75C18.75 29.44 19.31 30 20 30C20.69 30 21.25 29.44 21.25 28.75V21.25H28.75C29.44 21.25 30 20.69 30 20C30 19.31 29.44 18.75 28.75 18.75Z"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_74_317">
+                                            <rect width="40" height="40" rx="20" fill="white"/>
+                                        </clipPath>
+                                    </defs>
                                 </svg>
                             </button>
                         </div>
-                        <form th:action="'/market/product_settings/delete/' + ${el.id}" method="post">
+
+                        <button type="button" class="shopping__cart">
+                            <svg class="shopping__cart-add" width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                        d="M18.75 12.5C15.3125 12.5 12.5 15.3125 12.5 18.75C12.5 22.1875 15.3125 25 18.75 25C22.1875 25 25 22.1875 25 18.75C25 15.3125 22.1875 12.5 18.75 12.5ZM21.0938 19.5312H19.5312V21.0938C19.5312 21.5625 19.2188 21.875 18.75 21.875C18.2812 21.875 17.9688 21.5625 17.9688 21.0938V19.5312H16.4062C15.9375 19.5312 15.625 19.2188 15.625 18.75C15.625 18.2812 15.9375 17.9688 16.4062 17.9688H17.9688V16.4062C17.9688 15.9375 18.2812 15.625 18.75 15.625C19.2188 15.625 19.5312 15.9375 19.5312 16.4062V17.9688H21.0938C21.5625 17.9688 21.875 18.2812 21.875 18.75C21.875 19.2188 21.5625 19.5312 21.0938 19.5312Z"
+                                />
+                                <path
+                                        d="M11.0938 20.3125C11.0156 19.8438 10.9375 19.2969 10.9375 18.75H5.9375C5.70313 18.75 5.46875 18.5156 5.46875 18.2812C5.46875 18.0469 5.625 17.8125 5.85938 17.8125L11.1719 16.9531C11.9531 13.5156 15.0781 10.9375 18.75 10.9375C19.5313 10.9375 20.2344 11.0156 20.9375 11.25L21.875 6.40625C21.9531 6.01562 21.6406 5.54688 21.25 5.46875C20.8594 5.39062 20.3906 5.70313 20.3125 6.09375L20.1562 7.03125H5.15625V6.95312C5.625 5.9375 5.625 4.76562 5 3.82813C4.45313 2.89063 3.4375 2.34375 2.34375 2.34375H0.78125C0.3125 2.34375 0 2.65625 0 3.125C0 3.59375 0.3125 3.90625 0.78125 3.90625H2.34375C2.89063 3.90625 3.4375 4.21875 3.75 4.6875C4.0625 5.15625 4.0625 5.78125 3.82813 6.25L3.20313 7.5C3.20313 7.57813 3.20313 7.57812 3.125 7.65625C3.125 7.65625 3.125 7.73438 3.125 7.8125C3.125 7.89062 3.125 7.89062 3.125 7.96875C3.125 8.04688 3.125 8.04687 3.125 8.125L6.09375 16.1719L5.625 16.25C4.60938 16.4062 3.90625 17.2656 3.90625 18.2812C3.90625 19.0625 4.29688 19.6875 4.92188 20.0781C4.76563 20.3906 4.6875 20.7031 4.6875 21.0938C4.6875 22.4219 5.70313 23.4375 7.03125 23.4375C8.35938 23.4375 9.375 22.4219 9.375 21.0938C9.375 20.7812 9.29688 20.5469 9.21875 20.3125H11.0938ZM7.03125 21.875C6.5625 21.875 6.25 21.5625 6.25 21.0938C6.25 20.625 6.5625 20.3125 7.03125 20.3125C7.5 20.3125 7.8125 20.625 7.8125 21.0938C7.8125 21.5625 7.5 21.875 7.03125 21.875Z"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                    <form th:action="'/market/product_settings/delete/' + ${el.id}" method="post">
                         <div class="product_delete">
                             <button class="btn" type="submit">Удалить</button>
                         </div>
-                        </form>
-                    </div>
+                    </form>
+
+                    <a class="btn" th:href="'/market/product_settings/edit/' +${el.id}">Редактировать</a>
+
                 </div>
 
             </div>
-        </section>
 
-        <section class="product_settings">
-            <div class="container">
-                <h1 class="product_title">Добавить или редактировать товар</h1>
-                <a href="#!" class="btn">Перейти</a>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
 
+    <section class="product_settings">
+        <div class="container">
+            <h1 class="product_title">Добавить или редактировать товар</h1>
+            <a href="#!" class="btn">Перейти</a>
+        </div>
+    </section>
+</main>
 
-<header th:insert="blocks/footer"></header>
+
+<header th:insert="~{blocks/footer}"></header>
 </body>
 
 </html>

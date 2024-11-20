@@ -26,7 +26,7 @@
 <section class="catalog">
     <div class="container">
         <div class="food-list__card" th:each="el : ${products}">
-            <img th:src="${el.image}" alt="" class="food-list__img">
+            <img th:src="'/images/' + ${el.getPreviewImageId}" alt="" class="food-list__img">
             <div class="food-list__text-wrapper">
                 <h4 class="food-list__title" th:text="${el.title}">Хачапури</h4>
                 <p class="food-list__desc" th:text="${el.description}">лепёшка из теста с сырной начинкой. В середине
